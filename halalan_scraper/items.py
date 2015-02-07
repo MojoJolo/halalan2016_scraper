@@ -15,6 +15,7 @@ class ArticleItem(Item):
   url = Field()
   title = Field()
   article = Field()
+  date = Field() # 2015-02-05 ISO format
 
 class ArticleItemLoader(ItemLoader):
   default_item_class = ArticleItem

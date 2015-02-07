@@ -32,6 +32,7 @@ class Rappler(Spider):
 
     title = response.xpath('//h1/text()').extract()
     article_id = url.split('/')[-1].split('-')[0]
+    article_id = "rappler-%s" % article_id
 
     article = response.xpath('//div[@class="storypage-divider"]/p/text()').extract()
     article = "\n".join(article)
