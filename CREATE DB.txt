@@ -1,0 +1,10 @@
+CREATE DATABASE halalan2016;
+
+CREATE TABLE `articles` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` varchar(20) NOT NULL DEFAULT '',
+  `title` text NOT NULL,
+  `article` text NOT NULL,
+  `date` varchar(10) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
