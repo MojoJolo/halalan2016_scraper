@@ -1,3 +1,4 @@
 scrapy
 scrapylib
 requests
+MySQL-python
