@@ -1,3 +1,5 @@
+import datetime
+
 from scrapy.spider import Spider
 from scrapy.http import Request
 
@@ -9,6 +11,8 @@ class Rappler(Spider):
   base_url = 'http://www.rappler.com'
 
   start_urls = ['http://www.rappler.com/previous-articles?filterCategory54d0eb581a5b6_1=21&filterCategory=21&filterCategory54d0eb581a5b6_2=21&filterTitle=&filterMeta=&filterDateFrom=2015-01-01&filterDateTo=&option=com_dmarticlesfilter&view=articles&Itemid=1404&userSearch=1']
+
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
   def parse(self, response):
     news_links = response.xpath('//h4/a/@href').extract()
@@ -37,9 +41,18 @@ class Rappler(Spider):
     article = response.xpath('//div[@class="storypage-divider"]/p/text()').extract()
     article = "\n".join(article)
 
+    date = response.xpath('//div[@class="caption smaller publish-up"]/text()').extract()[0]
+    date = date.split()[-3:]
+    year = date[-1]
+    month = date[0]
+    day = date[1].replace(',', '')
+
+    date = datetime.date(int(year), self.months.index(month) + 1, int(day)).isoformat()
+
     loader.add_value('title', title)
     loader.add_value('url', url)
     loader.add_value('article_id', article_id)
     loader.add_value('article', article)
+    loader.add_value('date', date)
 
     yield loader.load_item()
