@@ -11,9 +11,9 @@ class Db:
     self.cursor = self.db.cursor()
 
   def insert(self, item):
-    query = """INSERT INTO articles (article_id, title, article, date) VALUES (%s, %s, %s, %s)"""
+    query = """INSERT INTO articles (article_id, title, article, date, url) VALUES (%s, %s, %s, %s, %s)"""
 
-    self.cursor.execute(query, (item['article_id'], item['title'], item['article'], item['date']))
+    self.cursor.execute(query, (item['article_id'], item['title'], item['article'], item['date'], item['url']))
 
     id = self.cursor.lastrowid
 

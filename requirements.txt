@@ -4,3 +4,4 @@ requests
 MySQL-python
 textblob
 # python -m textblob.download_corpora
+nltk

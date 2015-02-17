@@ -38,8 +38,8 @@ class Rappler(Spider):
     article_id = url.split('/')[-1].split('-')[0]
     article_id = "rappler-%s" % article_id
 
-    article = response.xpath('//div[@class="storypage-divider"]//p/text()').extract()
-    article = "\n".join(article)
+    article = response.xpath('//div[@class="storypage-divider"]//p//text()').extract()
+    article = " ".join(article)
 
     date = response.xpath('//div[@class="caption smaller publish-up"]/text()').extract()[0]
     date = date.split()[-3:]
